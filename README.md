@@ -1,15 +1,14 @@
 # hm-dianping
+
 ## 手机号+验证码注册登录
-### 工具类
-校验手机号
-```java
-RegexUtils.isPhoneInvalid(phone);
-```
+
+
+### 随机工具RandomUtil
 生成定长随机数列
 ```java
 String code = RandomUtil.randomNumbers(6);
 ```
-返回类型约定
+### 返回类型约定
 ```java
 public class Result {
     private Boolean success;
@@ -31,7 +30,11 @@ public class Result {
     }
 }
 ```
-正则类
+### 正则类
+校验手机号
+```java
+RegexUtils.isPhoneInvalid(phone);
+```
 ```java
 public class RegexUtils {
     /**
@@ -69,7 +72,7 @@ public class RegexUtils {
     }
 }
 ```
-ThreadLocal工具类
+### ThreadLocal工具类
 ```java
 public class UserHolder {
     private static final ThreadLocal<UserDTO> tl = new ThreadLocal<>();
@@ -86,4 +89,23 @@ public class UserHolder {
         tl.remove();
     }
 }
+```
+### BeanUtil使用
+
+#### 属性拷贝BeanUtil.copyProperties
+```java
+UserDTO userDTO = BeanUtil.copyProperties(user, UserDTO.class);
+```
+
+#### 对象转哈希BeanUtil.beanToMap
+```java
+Map<String, Object> userMap = BeanUtil.beanToMap(userDTO, new HashMap<>(),
+        CopyOptions.create()
+                .setIgnoreNullValue(true)
+                .setFieldValueEditor((fieldName, fieldValue) -> fieldValue.toString()));
+```
+
+### 随机生成token
+```java
+String token = UUID.randomUUID().toString(true);
 ```
