@@ -3,7 +3,7 @@
 ### 工具类
 校验手机号
 ```java
-RegexUtils.isPhoneInvalid(phone)
+RegexUtils.isPhoneInvalid(phone);
 ```
 生成定长随机数列
 ```java
@@ -66,6 +66,24 @@ public class RegexUtils {
             return true;
         }
         return !str.matches(regex);
+    }
+}
+```
+ThreadLocal工具类
+```java
+public class UserHolder {
+    private static final ThreadLocal<UserDTO> tl = new ThreadLocal<>();
+
+    public static void saveUser(UserDTO user){
+        tl.set(user);
+    }
+
+    public static UserDTO getUser(){
+        return tl.get();
+    }
+
+    public static void removeUser(){
+        tl.remove();
     }
 }
 ```
